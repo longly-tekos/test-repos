@@ -5,13 +5,19 @@ name: onPublicWebhook
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  public:
-  create:
-    branches: 
-      - release/*
+  # public:
+  # create:
+  #   branches: 
+  #     - release/*
 
-    paths:
-      - backend/**
+  #   paths:
+  #     - backend/**
+  branches:
+    - develop
+    - main
+    - release/*
+  paths:
+    - frontend/**
   # Allows you to run this workflow manually from the Actions tab
 
 
