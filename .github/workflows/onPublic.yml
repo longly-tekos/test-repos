@@ -9,6 +9,9 @@ on:
   create:
     branches: 
       - release/*
+
+    paths:
+      - backend/**
   # Allows you to run this workflow manually from the Actions tab
 
 
