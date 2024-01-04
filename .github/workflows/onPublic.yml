@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run a one-line script
         run: |
+          echo "ref name is ${{ github.ref_name }}
           echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
   
   # build-prod:
