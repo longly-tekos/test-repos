@@ -9,7 +9,8 @@ on:
   workflow_dispatch:
 
   # Allows you to run this workflow manually from the Actions tab
-
+env:
+  APP_NAME: frontend
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run a one-line script
         run: |
-          echo "run on ${{ env.ENVIRONMENT_NAME }} environment"
+          echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
   
   build-prod:
     environment: production
@@ -30,4 +31,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run a one-line script
         run: |
-          echo "run on ${{ env.ENVIRONMENT_NAME }} environment"
+          echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
+          echo "application name is ${{ env.APP_NAME }}"
