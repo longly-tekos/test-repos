@@ -19,7 +19,7 @@ jobs:
     environment: |-
       ${{
         github.ref_name == 'main'             && 'production'
-      || startsWith(github.ref, 'ref/head/release/') && 'staging'
+      || contains(github.ref_name, 'release/') && 'staging'
       ||                                         'develop'
       }}
     runs-on: ubuntu-latest
