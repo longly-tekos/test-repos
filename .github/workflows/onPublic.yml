@@ -18,9 +18,9 @@ jobs:
   build:
     environment: |-
       ${{
-        github.ref_name == 'main'          && 'production'
-      || github.ref_name == 'release/*'    && 'staging'
-      ||                                      'develop'
+        github.ref_name == 'main'             && 'production'
+      || contains('release', github.ref_name) && 'staging'
+      ||                                         'develop'
       }}
     runs-on: ubuntu-latest
     steps:
