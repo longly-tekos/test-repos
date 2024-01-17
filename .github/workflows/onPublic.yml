@@ -33,9 +33,9 @@ jobs:
           url: https://demo-vault.tekos.ovh
           token: ${{ secrets.VAULT_TOKEN }}
           secrets: |
-              kv/data/prod/sample_app accessKey | AWS_ACCESS_KEY_ID ;
-              kv/data/prod/sample_app secretKey | AWS_SECRET_ACCESS_KEY ;
-              secret/data/prod/sample_app postgres_uri
+              kv/data/prod/sample_app AWS_ACCESS_KEY_ID | AWS_ACCESS_KEY_ID ;
+              kv/data/prod/sample_app AWS_SECRET_ACCESS_KEY | AWS_SECRET_ACCESS_KEY ;
+              kv/data/prod/sample_app postgres_uri
               
       - name: Run a one-line script
         run: |
