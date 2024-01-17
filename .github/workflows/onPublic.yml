@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: multienvironment
+name: integratevault
 
 # Controls when the workflow will run
 on:
@@ -25,17 +25,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://demo-vault.tekos.ovh
+          token: ${{ secrets.VAULT_TOKEN }}
+          secrets: |
+              kv/data/ci/aws accessKey | AWS_ACCESS_KEY_ID ;
+              kv/data/ci/aws secretKey | AWS_SECRET_ACCESS_KEY ;
+              secret/data/ci postgres_uri
+              
       - name: Run a one-line script
         run: |
-          echo "ref name is ${{ github.ref_name }}"
-          echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
+          echo "aws secret ${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "aws key ${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "postgres uri ${{ env.postgres_uri }}"
   
-  # build-prod:
-  #   environment: production
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Run a one-line script
-  #       run: |
-  #         echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
-  #         echo "application name is ${{ env.APP_NAME }}"
