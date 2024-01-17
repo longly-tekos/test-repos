@@ -41,5 +41,5 @@ jobs:
         run: |
           echo "aws secret ${{ env.AWS_SECRET_ACCESS_KEY }}"
           echo "aws key ${{ env.AWS_ACCESS_KEY_ID }}"
-          echo "postgres uri ${{ env.postgres_uri }}"
+          echo "postgres uri ${{ env.POSTGRES_URI }}"
   
