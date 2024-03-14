@@ -7,6 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
   workflow_dispatch:
+  issue_comment:                                     
+    types: [created, edited, deleted]
 
   # Allows you to run this workflow manually from the Actions tab
 env:
@@ -29,7 +31,47 @@ jobs:
         run: |
           echo "ref name is ${{ github.ref_name }}"
           echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
-  
+
+  Tagging:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Minor version for each merge
+        id: taggerDryRun
+        uses: anothrNick/github-tag-action@1.36.0
+        with:
+          release_branches: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
+
+      - name: echo new tag
+        run: |
+          echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
+      - name: echo tag
+        run: |
+          echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
+      - name: echo part
+        run: |
+          echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }} ss"
+
+
+      # DO MY BUILD HERE
+      # IN CASE OF FAILURE, THE STEP BELOW WILL NOT RUN.
+      
+
+      - name: Minor version for each merge
+        id: taggerFinal
+        uses: anothrNick/github-tag-action@1.36.0
+        with:
+          release_branches: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+
   # build-prod:
   #   environment: production
   #   runs-on: ubuntu-latest
