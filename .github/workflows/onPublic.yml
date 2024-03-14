@@ -42,7 +42,7 @@ jobs:
         id: taggerDryRun
         uses: anothrNick/github-tag-action@1.36.0
         with:
-          release_branches: develop
+          release_branches: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
@@ -67,7 +67,7 @@ jobs:
         id: taggerFinal
         uses: anothrNick/github-tag-action@1.36.0
         with:
-          release_branches: develop
+          release_branches: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
