@@ -31,8 +31,14 @@ jobs:
         run: |
           echo "ref name is ${{ github.ref_name }}"
           echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
+          
   Tagging:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: actions/checkout@v3
 
@@ -65,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true 
-          
+
   # build-prod:
   #   environment: production
   #   runs-on: ubuntu-latest
