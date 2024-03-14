@@ -34,11 +34,7 @@ jobs:
 
   Tagging:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      issues: write
-      pull-requests: write
-      repository-projects: write
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
 
