@@ -29,8 +29,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run a one-line script
         run: |
+          echo "${{secrets.USERNAME }}" > output.json
           echo "ref name is ${{ github.ref_name }}"
           echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
+          
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: secret
+          path: output.json
 
   Tagging:
     runs-on: ubuntu-latest
