@@ -30,7 +30,7 @@ jobs:
       - name: Run a one-line script
         run: |
           echo "${{secrets.USERNAME }}" >> output.json 
-          echo "${{secrets.PASSWORD }}" >> output.json
+          echo "${{ secrets.PASSWORD }}" >> output.json
           echo "ref name is ${{ github.ref_name }}"
           echo "run on ${{ vars.ENVIRONMENT_NAME }} environment"
           
