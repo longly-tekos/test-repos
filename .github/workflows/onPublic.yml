@@ -25,7 +25,7 @@ jobs:
       - name: Define running project
         id: running_project
         run: |
-          echo '${{vars.USE_VARIABLES}}' >> "$GITHUB_OUTPUT"
+          echo 'USE_VARIABLES="${{vars.USE_VARIABLES}}"' >> "$GITHUB_OUTPUT"
   build:
     environment: |-
       ${{
