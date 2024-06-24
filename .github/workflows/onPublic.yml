@@ -25,10 +25,10 @@ jobs:
       - name: Define running project
         id: running_project
         run: |
-          if [ "$USE_VARIABLES" == "" ]; then
-            echo 'USE_VARIABLES="null"' >> "$GITHUB_OUTPUT"
-          else
+          if [ -n "$USE_VARIABLES" ]; then
             echo 'USE_VARIABLES="$USE_VARIABLES"' >> "$GITHUB_OUTPUT"
+          else
+            echo 'USE_VARIABLES="null"' >> "$GITHUB_OUTPUT"
           fi
         env:
           USE_VARIABLES: ${{ vars.USE_VARIABLES }}
