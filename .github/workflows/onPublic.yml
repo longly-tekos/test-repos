@@ -30,7 +30,6 @@ jobs:
           else
             echo 'USE_VARIABLES=null' >> "$GITHUB_OUTPUT"
           fi
-          echo $USE_VARIABLES
         env:
           USE_VARIABLES: ${{ vars.USE_VARIABLES }}
   build:
