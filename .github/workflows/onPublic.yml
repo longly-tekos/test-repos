@@ -13,11 +13,19 @@ on:
   # Allows you to run this workflow manually from the Actions tab
 env:
   APP_NAME: frontend
-  USE_VARIABLES: ${{vars.USE_VARIABLES }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
+  define-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      USE_VARIABLES: ${{ steps.running_project.outputs.USE_VARIABLES }}
+    steps:
+      - name: Define running project
+        id: running_project
+        run: |
+          echo '${{vars.USE_VARIABLES}}' >> "$GITHUB_OUTPUT"
   build:
     environment: |-
       ${{
@@ -26,7 +34,8 @@ jobs:
       ||                                         'develop'
       }}
     runs-on: ubuntu-latest
-    if: ${{ env.USE_VARIABLES }}
+    needs: define-matrix
+    if: ${{ needs.define-matrix.outputs.USE_VARIABLES != '' }}
     steps:
       - uses: actions/checkout@v3
       - name: Run a one-line script
