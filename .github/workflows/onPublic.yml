@@ -25,7 +25,7 @@ jobs:
       ||                                         'develop'
       }}
     runs-on: ubuntu-latest
-    if: ${{ none != vars.USE_VARIABLES }}
+    if: ${{ "" != vars.USE_VARIABLES }}
     steps:
       - uses: actions/checkout@v3
       - name: Run a one-line script
